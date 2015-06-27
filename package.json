@@ -1,19 +1,15 @@
 {
   "dependencies": {
-    "react": "^0.12.2",
-    "react-tools": "^0.12.2"
+    "react": "^0.13.3",
+    "react-tools": "^0.13.3"
   },
   "devDependencies": {
-    "blanket": "^1.1.6",
-    "coveralls": "^2.11.2",
-    "glob": "^4.3.5",
-    "jsdom": "^3.1.1",
-    "mocha": "2.1.0",
-    "mocha-jsdom": "^0.2.1",
-    "mocha-lcov-reporter": "0.0.1"
-  },
-  "scripts": {
-    "test": "mocha --compilers .:tests/compiler.js tests/*-test.js"
+    "blanket": "^1.1.7",
+    "glob": "^5.0.10",
+    "jsdom-no-contextify": "^3.1.0",
+    "mocha": "^2.0.1",
+    "mocha-lcov-reporter": "0.0.2",
+    "mocha-sonar-reporter": "^0.1.2"
   },
   "config": {
     "blanket": {
@@ -23,7 +19,16 @@
         "node_modules",
         "tests"
       ],
-      "loader": "../../../tests/blanket-stub-jsx.js"
+      "loader": "../../../tests/utils/blanket-stub-jsx.js"
+    },
+    "mocha-sonar-reporter": {
+      "testdir": "tests",
+      "outputfile": "target/reports/TESTS-all.xml"
     }
+  },
+  "scripts": {
+    "test": "mocha --compilers jsx:tests/utils/compiler.js tests/*test.jsx",
+    "test-lcov": "mocha --compilers jsx:tests/utils/compiler.js --reporter mocha-sonar-reporter tests/*test.jsx && mocha --require blanket --reporter mocha-lcov-reporter tests/*test.jsx > target/reports/lcov.info",
+    "test-debug": "mocha --debug-brk --compilers jsx:tests/utils/compiler.js tests/*test.jsx"
   }
 }

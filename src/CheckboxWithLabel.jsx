@@ -1,5 +1,5 @@
 var React = require('react/addons');
-var BigComplicatedComponent = require('./BigComplicatedComponent.js');
+var BigComplicatedComponent = require('./BigComplicatedComponent.jsx');
 
 var CheckboxWithLabel = React.createClass({
   getInitialState: function() {
